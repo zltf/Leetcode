@@ -1685,6 +1685,56 @@ class Solution {
 
 内存消耗：39.3 MB, 在所有 Java 提交中击败了7.47%的用户
 
+# 532. 连续的子数组和（中等）
+
+## 暴力法遍历所有子数组
+
+```java
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        for (int i = 0; i < nums.length; i++) {
+            int sum = nums[i];
+            for(int j = i + 1; j < nums.length; j++) {
+                sum += nums[j];
+                if (sum % k == 0) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}
+```
+
+超出时间限制
+
+## 前缀和+哈希表
+
+```java
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        int remainder = 0;
+        for (int i=0; i<nums.length; i++) {
+            remainder = (remainder + nums[i]) % k;
+            if (map.containsKey(remainder)) {
+                if (i - map.get(remainder) >= 2) {
+                    return true;
+                }
+            } else {
+                map.put(remainder, i);
+            }
+        }
+        return false;
+    }
+}
+```
+
+执行用时：20 ms, 在所有 Java 提交中击败了54.79%的用户
+
+内存消耗：54.8 MB, 在所有 Java 提交中击败了9.24%的用户
+
 # 650. 只有两个键的键盘（中等）
 
 ## 递归
