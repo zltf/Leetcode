@@ -1685,6 +1685,38 @@ class Solution {
 
 内存消耗：39.3 MB, 在所有 Java 提交中击败了7.47%的用户
 
+# 525. 连续数组
+
+## 前缀和+哈希表
+
+```java
+class Solution {
+    public int findMaxLength(int[] nums) {
+        int tmp = 0;
+        int maxDis = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        map.put(0, -1);
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] == 1) {
+                tmp++;
+            } else {
+                tmp--;
+            }
+            if (map.containsKey(tmp)) {
+                maxDis = i - map.get(tmp) > maxDis ? i - map.get(tmp) : maxDis;
+            } else {
+                map.put(tmp, i);
+            }
+        }
+        return maxDis;
+    }
+}
+```
+
+执行用时：28 ms, 在所有 Java 提交中击败了46.79%的用户
+
+内存消耗：48.2 MB, 在所有 Java 提交中击败了33.70%的用户
+
 # 532. 连续的子数组和（中等）
 
 ## 暴力法遍历所有子数组
