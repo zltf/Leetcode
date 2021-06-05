@@ -1060,7 +1060,46 @@ class Solution {
 
 内存消耗：38.5 MB, 在所有 Java 提交中击败了10.62%的用户
 
+# 160. 相交链表（简单）
 
+## 双栈法
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        Stack<ListNode> stackA= new Stack<>();
+        Stack<ListNode> stackB= new Stack<>();
+        for (ListNode node=headA; node!=null; node=node.next) {
+            stackA.push(node);
+        }
+        for (ListNode node=headB; node!=null; node=node.next) {
+            stackB.push(node);
+        }
+        ListNode res = null;
+        while (!stackA.empty() && !stackB.empty() && stackA.peek() == stackB.peek()) {
+            res = stackA.peek();
+            stackA.pop();
+            stackB.pop();
+        }
+        return res;
+    }
+}
+```
+
+执行用时：3 ms, 在所有 Java 提交中击败了20.23%的用户
+
+内存消耗：41.3 MB, 在所有 Java 提交中击败了50.32%的用户
 
 # 173. 二叉搜索树迭代器（中等）
 
@@ -1685,7 +1724,7 @@ class Solution {
 
 内存消耗：39.3 MB, 在所有 Java 提交中击败了7.47%的用户
 
-# 525. 连续数组
+# 525. 连续数组（中等）
 
 ## 前缀和+哈希表
 
