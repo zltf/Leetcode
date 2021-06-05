@@ -1365,6 +1365,42 @@ class Solution {
 
 内存消耗：40.7 MB, 在所有 Java 提交中击败了80.55%的用户
 
+# 203. 移除链表元素（简单）
+
+## 哑节点+迭代移除
+
+```java
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode removeElements(ListNode head, int val) {
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode node=dummy;
+        while (node.next!=null) {
+            if (node.next.val == val) {
+                node.next = node.next.next;
+            } else {
+                node=node.next;
+            }
+        }
+        return dummy.next;
+    }
+}
+```
+
+执行用时：1 ms, 在所有 Java 提交中击败了99.81%的用户
+
+内存消耗：39.2 MB, 在所有 Java 提交中击败了84.56%的用户
+
 # 208. 实现Trie（前缀树）（中等）
 
 ## 孩子链表多叉树
